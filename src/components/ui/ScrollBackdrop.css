@@ -1,0 +1,187 @@
+.scroll-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scroll-backdrop-glow {
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--scroll-accent) 5%, transparent), transparent 30%);
+  opacity: calc(0.03 + var(--scroll-progress) * 0.05);
+  transform: translateY(calc(var(--scroll-progress) * -6vh));
+}
+
+.scroll-backdrop-halftone,
+.scroll-backdrop-grain,
+.scroll-backdrop-texture {
+  position: absolute;
+  pointer-events: none;
+}
+
+.scroll-backdrop-texture {
+  inset: 0;
+  background-image: var(--halftone-texture);
+  background-repeat: no-repeat;
+  background-size: 1200px auto;
+  mix-blend-mode: screen;
+  opacity: calc(0.045 + var(--scroll-progress) * 0.035);
+  filter: grayscale(1) contrast(1.15) brightness(0.78);
+}
+
+.scroll-backdrop-texture-left {
+  background-position: left 12% bottom -10%;
+  transform: translate3d(calc(var(--scroll-progress) * -2vw), calc(var(--scroll-progress) * 9vh), 0) scale(1.08);
+  -webkit-mask-image: radial-gradient(circle at 10% 78%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.88) 18%, rgba(0, 0, 0, 0.35) 34%, transparent 54%);
+  mask-image: radial-gradient(circle at 10% 78%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.88) 18%, rgba(0, 0, 0, 0.35) 34%, transparent 54%);
+}
+
+.scroll-backdrop-texture-right {
+  background-position: right -8% top -4%;
+  transform: translate3d(calc(var(--scroll-progress) * 2vw), calc(var(--scroll-progress) * 4vh), 0) rotate(180deg) scale(1.05);
+  -webkit-mask-image: radial-gradient(circle at 90% 24%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.88) 18%, rgba(0, 0, 0, 0.32) 36%, transparent 56%);
+  mask-image: radial-gradient(circle at 90% 24%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.88) 18%, rgba(0, 0, 0, 0.32) 36%, transparent 56%);
+}
+
+.scroll-backdrop-halftone {
+  inset: 0;
+  opacity: calc(0.08 + var(--scroll-progress) * 0.06);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0 1.3px, transparent 1.9px);
+  background-size: 14px 14px;
+  filter: blur(0.2px);
+}
+
+.scroll-backdrop-halftone-left {
+  transform: translate3d(calc(var(--scroll-progress) * -2vw), calc(var(--scroll-progress) * 8vh), 0);
+  -webkit-mask-image: radial-gradient(circle at 8% 74%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.94) 12%, rgba(0, 0, 0, 0.48) 24%, transparent 42%);
+  mask-image: radial-gradient(circle at 8% 74%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.94) 12%, rgba(0, 0, 0, 0.48) 24%, transparent 42%);
+}
+
+.scroll-backdrop-halftone-right {
+  transform: translate3d(calc(var(--scroll-progress) * 2vw), calc(var(--scroll-progress) * 4vh), 0);
+  -webkit-mask-image: radial-gradient(circle at 92% 22%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.94) 12%, rgba(0, 0, 0, 0.44) 26%, transparent 44%);
+  mask-image: radial-gradient(circle at 92% 22%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.94) 12%, rgba(0, 0, 0, 0.44) 26%, transparent 44%);
+}
+
+.scroll-backdrop-grain {
+  inset: 0;
+  opacity: 0.035;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.24) 0 0.7px, transparent 1px),
+    radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.18) 0 0.8px, transparent 1.1px),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.14) 0 0.6px, transparent 1px);
+  background-size: 18px 18px, 22px 22px, 16px 16px;
+  mix-blend-mode: screen;
+}
+
+.scroll-backdrop-ornament,
+.scroll-backdrop-crown {
+  position: absolute;
+  stroke: rgba(255, 143, 157, 0.58);
+  fill: none;
+  stroke-width: 1.8;
+  vector-effect: non-scaling-stroke;
+  opacity: calc(0.22 + var(--scroll-progress) * 0.2);
+  filter: drop-shadow(0 0 12px rgba(255, 143, 157, 0.08));
+}
+
+.scroll-backdrop-ornament path,
+.scroll-backdrop-crown path {
+  stroke: rgba(255, 143, 157, 0.58);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.scroll-backdrop-ornament-left {
+  top: -12vh;
+  left: -8vw;
+  width: min(32vw, 420px);
+  height: auto;
+  transform: translate3d(0, calc(var(--scroll-progress) * 18vh), 0) rotate(-5deg);
+}
+
+.scroll-backdrop-ornament-right {
+  top: -8vh;
+  right: -9vw;
+  width: min(32vw, 420px);
+  height: auto;
+  transform: translate3d(0, calc(var(--scroll-progress) * 10vh), 0) rotate(8deg) scaleX(-1);
+}
+
+.scroll-backdrop-crown {
+  display: none;
+  top: -6vh;
+  left: 50%;
+  width: min(84vw, 1200px);
+  transform: translate3d(-50%, calc(var(--scroll-progress) * -6vh), 0);
+  opacity: calc(0.06 + var(--scroll-progress) * 0.1);
+}
+
+@media (max-width: 768px) {
+  .scroll-backdrop-glow {
+    opacity: calc(0.02 + var(--scroll-progress) * 0.04);
+  }
+
+  .scroll-backdrop-texture {
+    background-size: 860px auto;
+    opacity: calc(0.03 + var(--scroll-progress) * 0.025);
+  }
+
+  .scroll-backdrop-halftone {
+    opacity: calc(0.05 + var(--scroll-progress) * 0.04);
+    background-size: 12px 12px;
+  }
+
+  .scroll-backdrop-grain {
+    opacity: 0.02;
+  }
+
+  .scroll-backdrop-ornament,
+  .scroll-backdrop-crown {
+    stroke-width: 1.7;
+    opacity: calc(0.1 + var(--scroll-progress) * 0.1);
+  }
+
+  .scroll-backdrop-ornament-left,
+  .scroll-backdrop-ornament-right {
+    width: 44vw;
+  }
+
+  .scroll-backdrop-crown {
+    width: 120vw;
+    top: 2vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-backdrop-crown {
+    display: none;
+  }
+
+  .scroll-backdrop-texture {
+    background-size: 640px auto;
+    opacity: 0.022;
+  }
+
+  .scroll-backdrop-halftone {
+    opacity: 0.04;
+    background-size: 11px 11px;
+  }
+
+  .scroll-backdrop-ornament-left,
+  .scroll-backdrop-ornament-right {
+    width: 52vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-backdrop-glow,
+  .scroll-backdrop-ornament-left,
+  .scroll-backdrop-ornament-right,
+  .scroll-backdrop-crown {
+    transform: none;
+  }
+}
