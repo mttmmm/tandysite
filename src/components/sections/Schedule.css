@@ -1,0 +1,413 @@
+.schedule {
+  background-color: transparent;
+}
+
+.schedule-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.schedule-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  font-family: var(--font-pixel);
+}
+
+.schedule-heading {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--color-text);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.schedule-heading-accent {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.schedule-subtitle {
+  max-width: 580px;
+  margin: 1.5rem auto 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* Frame principal (espelha .contact-form) */
+.schedule-frame {
+  background: rgba(20, 16, 16, 0.78);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(8px);
+  padding: 3rem 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(255, 255, 255, 0.04),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Toolbar com mês e navegação */
+.schedule-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: 1.25rem;
+}
+
+.schedule-month-label {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.schedule-nav {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+  font-family: var(--font-body);
+}
+
+.schedule-nav:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.schedule-nav:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.schedule-nav-arrow {
+  transform: translateY(-1px);
+  font-weight: 300;
+}
+
+/* Cabeçalho dos dias da semana */
+.schedule-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.schedule-weekday {
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-text-muted);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+/* Grade */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  position: relative;
+  min-height: 280px;
+}
+
+.schedule-grid.is-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+/* Células */
+.schedule-cell {
+  font: inherit;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 72px;
+  padding: 0.5rem 0.25rem;
+  border: 1px solid var(--color-border-subtle);
+  background: rgba(255, 255, 255, 0.015);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.25s ease,
+    background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.schedule-cell-day {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.schedule-cell-tag {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.schedule-cell:hover .schedule-cell-tag,
+.schedule-cell:focus-visible .schedule-cell-tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Vazio (dia de fora do mês) */
+.schedule-cell-empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Hoje */
+.schedule-cell.is-today {
+  outline: 1px solid var(--color-accent);
+  outline-offset: -1px;
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.05);
+}
+
+/* Reservado */
+.schedule-cell.is-busy {
+  background: var(--color-accent);
+  color: #0a0a0a;
+  border-color: var(--color-accent);
+  cursor: default;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.08);
+}
+
+.schedule-cell.is-busy .schedule-cell-tag {
+  color: rgba(10, 10, 10, 0.7);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.schedule-cell.is-busy:hover {
+  transform: translateY(-2px);
+}
+
+/* Disponível */
+.schedule-cell.is-free:hover,
+.schedule-cell.is-free:focus-visible {
+  border-color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.schedule-cell.is-free .schedule-cell-tag {
+  color: var(--color-accent);
+}
+
+/* Passado */
+.schedule-cell.is-past {
+  cursor: default;
+  pointer-events: none;
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+/* Estado de erro */
+.schedule-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.schedule-retry {
+  font-size: 0.72rem;
+  padding: 0.7rem 1.5rem;
+}
+
+/* Legenda */
+.schedule-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 1.25rem;
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.schedule-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.schedule-legend-dot {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--color-border);
+  display: inline-block;
+}
+
+.schedule-legend-dot-busy {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.schedule-legend-dot-free {
+  background: transparent;
+  border-color: var(--color-border);
+}
+
+.schedule-legend-dot-today {
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .schedule-header {
+    margin-bottom: 3rem;
+  }
+
+  .schedule-frame {
+    padding: 2rem 1.5rem 1.75rem;
+    gap: 1.5rem;
+  }
+
+  .schedule-month-label {
+    font-size: 1.1rem;
+  }
+
+  .schedule-grid {
+    gap: 0.4rem;
+  }
+
+  .schedule-cell {
+    min-height: 60px;
+    padding: 0.4rem 0.15rem;
+  }
+
+  .schedule-cell-day {
+    font-size: 1rem;
+  }
+
+  .schedule-cell-tag {
+    font-size: 0.45rem;
+    letter-spacing: 0.12em;
+    /* já não esconde em telas menores para legibilidade */
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .schedule-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .schedule-legend {
+    gap: 1rem;
+    font-size: 0.55rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-header {
+    margin-bottom: 2rem;
+  }
+
+  .schedule-label,
+  .schedule-legend {
+    letter-spacing: 0.18em;
+  }
+
+  .schedule-frame {
+    padding: 1.5rem 1rem;
+    gap: 1.25rem;
+  }
+
+  .schedule-toolbar {
+    padding-bottom: 1rem;
+  }
+
+  .schedule-nav {
+    width: 38px;
+    height: 38px;
+  }
+
+  .schedule-month-label {
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .schedule-weekday {
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+  }
+
+  .schedule-grid {
+    gap: 0.35rem;
+  }
+
+  .schedule-cell {
+    min-height: 54px;
+    padding: 0.3rem 0.1rem;
+  }
+
+  .schedule-cell-day {
+    font-size: 0.95rem;
+  }
+
+  .schedule-cell-tag {
+    font-size: 0.42rem;
+    letter-spacing: 0.08em;
+  }
+}

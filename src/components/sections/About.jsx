@@ -37,7 +37,7 @@ const About = () => {
               <em>blackwork</em> e <em>fine line</em>. Transformei minha paixão
               pelo desenho em profissão durante a pandemia, e desde então venho
               criando tatuagens que carregam <em>identidade, sentimento e
-              significado</em>.
+                significado</em>.
             </p>
             <p className="about-bio">
               Cada trabalho é pensado nos mínimos detalhes para transformar
@@ -48,11 +48,6 @@ const About = () => {
               <div className="stat-item">
                 <span className="stat-number">84</span>
                 <span className="stat-label">Posts no<br />Instagram</span>
-              </div>
-              <div className="stat-divider" />
-              <div className="stat-item">
-                <span className="stat-number">100%</span>
-                <span className="stat-label">Materiais<br />Descartáveis</span>
               </div>
             </div>
           </div>
