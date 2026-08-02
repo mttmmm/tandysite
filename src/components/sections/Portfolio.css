@@ -88,31 +88,25 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 0.9rem 1.1rem;
-  min-width: min(82%, 280px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(10, 10, 10, 0.72);
-  color: var(--color-text);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.65rem;
-  font-family: var(--font-pixel);
-  backdrop-filter: blur(8px);
+  padding: 0;
+  border: 0;
+  background: transparent;
   transform: translate(-50%, -50%);
   z-index: 2;
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.2);
   pointer-events: none;
 }
 
 .portfolio-video-play-icon {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(242, 242, 242, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(10, 10, 10, 0.45);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
   position: relative;
   flex-shrink: 0;
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .portfolio-video-play-icon::before {
@@ -121,9 +115,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-38%, -50%);
-  border-top: 0.38rem solid transparent;
-  border-bottom: 0.38rem solid transparent;
-  border-left: 0.62rem solid #fff;
+  border-top: 0.42rem solid transparent;
+  border-bottom: 0.42rem solid transparent;
+  border-left: 0.7rem solid #fff;
+}
+
+.portfolio-video-poster:hover .portfolio-video-play-icon,
+.portfolio-video-poster:focus-visible .portfolio-video-play-icon {
+  transform: scale(1.08);
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(10, 10, 10, 0.6);
 }
 
 .portfolio-video-close {
@@ -206,15 +207,9 @@
     font-size: 1rem;
   }
 
-  .portfolio-video-play {
-    padding: 0.75rem 0.9rem;
-    gap: 0.65rem;
-    font-size: 0.58rem;
-  }
-
   .portfolio-video-play-icon {
-    width: 1.9rem;
-    height: 1.9rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   .portfolio-cta .btn {

@@ -68,9 +68,8 @@ const Portfolio = () => {
                       aria-label={`Reproduzir video ${work.title}`}
                     >
                       <img src={work.poster} alt={work.title} loading="lazy" />
-                      <span className="portfolio-video-play">
+                      <span className="portfolio-video-play" aria-hidden="true">
                         <span className="portfolio-video-play-icon" />
-                        Tocar video
                       </span>
                     </button>
                   )
