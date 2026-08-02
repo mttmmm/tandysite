@@ -24,10 +24,6 @@ const About = () => {
               <span className="about-photo-corner-tr" />
               <span className="about-photo-corner-bl" />
             </div>
-            <div className="about-photo-badge">
-              <span className="badge-number">5+</span>
-              <span className="badge-label">Anos de<br />Experiência</span>
-            </div>
           </div>
 
           <div className="about-text-side">
@@ -45,6 +41,11 @@ const About = () => {
             </p>
 
             <div className="about-stats">
+              <div className="stat-item">
+                <span className="stat-number">5+</span>
+                <span className="stat-label">Anos de<br />Experiência</span>
+              </div>
+              <div className="stat-divider" />
               <div className="stat-item">
                 <span className="stat-number">84</span>
                 <span className="stat-label">Posts no<br />Instagram</span>
